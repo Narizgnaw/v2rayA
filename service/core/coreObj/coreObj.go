@@ -149,6 +149,7 @@ type StreamSettings struct {
 	WsSettings      *WsSettings      `json:"wsSettings,omitempty"`
 	HTTPSettings    *HttpSettings    `json:"httpSettings,omitempty"`
 	GrpcSettings    *GrpcSettings    `json:"grpcSettings,omitempty"`
+	QuicSettings    *QuicSettings    `json:"quicSettings,omitempty"`
 	Sockopt         *Sockopt         `json:"sockopt,omitempty"`
 }
 type RealitySettings struct {
@@ -175,6 +176,7 @@ type Mux struct {
 type OutboundObject struct {
 	Tag            string          `json:"tag"`
 	Protocol       string          `json:"protocol"`
+	SendThrough    string          `json:"sendThrough,omitempty"`
 	Settings       Settings        `json:"settings,omitempty"`
 	StreamSettings *StreamSettings `json:"streamSettings,omitempty"`
 	ProxySettings  *ProxySettings  `json:"proxySettings,omitempty"`
@@ -243,6 +245,11 @@ type HttpSettings struct {
 	Path   string   `json:"path"`
 	Host   []string `json:"host,omitempty"`
 	Method string   `json:"method,omitempty"`
+}
+type QuicSettings struct {
+	Header   KcpHeader `json:"header"`
+	Key      string    `json:"key,omitempty"`
+	Security string    `json:"security"`
 }
 type Hosts map[string][]string
 

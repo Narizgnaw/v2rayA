@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"github.com/go-leo/slicex"
 	"net"
 	"net/url"
 	"os"
@@ -992,6 +993,32 @@ func (t *Template) appendDNSOutbound() {
 	})
 }
 
+func (t *Template) setSendThrough() {
+	ip, err := GetLanIP4()
+	if err != nil {
+		return
+	}
+	sendThrough := ip.String()
+	for i := 0; i < len(t.Outbounds); i++ {
+		t.Outbounds[i].SendThrough = sendThrough
+	}
+}
+
+func GetLanIP4() (net.IP, error) {
+	addresses, err := net.InterfaceAddrs()
+	if err != nil {
+		return nil, err
+	}
+	for _, addr := range addresses {
+		if ipnet, ok := addr.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				return ipnet.IP, nil
+			}
+		}
+	}
+	return net.IPv4zero, errors.New("lan not found")
+}
+
 func GenerateIdFromAccounts() (id string, err error) {
 	accounts, err := configure.GetAccounts()
 	if err != nil {
@@ -1046,6 +1073,16 @@ func (t *Template) setInbound() error {
 		switch t.Setting.TransparentType {
 		case configure.TransparentTproxy, configure.TransparentRedirect:
 			t.AppendDokodemoTProxy(string(t.Setting.TransparentType), 52345, "transparent")
+		case configure.TransparentGvisorTun, configure.TransparentSystemTun:
+			t.Inbounds = append(t.Inbounds, coreObj.Inbound{
+				Port:     52345,
+				Protocol: "socks",
+				Listen:   "127.0.0.1",
+				Settings: &coreObj.InboundSettings{
+					UDP: true,
+				},
+				Tag: "transparent",
+			})
 		case configure.TransparentSystemProxy:
 			t.Inbounds = append(t.Inbounds, coreObj.Inbound{
 				Port:     52345,
@@ -1386,18 +1423,24 @@ func (t *Template) resolveOutbounds(
 }
 
 func (t *Template) SetAPI(serverData *ServerData) (port int, err error) {
+	// find a valid port
+	config := configure.GetPortsNotNil()
+	if config.Api.Port != 0 {
+		port = config.Api.Port
+	} else {
+		for {
+			if l, err := net.Listen("tcp4", "127.0.0.1:0"); err == nil {
+				port = l.Addr().(*net.TCPAddr).Port
+				_ = l.Close()
+				break
+			}
+			time.Sleep(30 * time.Millisecond)
+		}
+	}
 	services := []string{
 		"LoggerService",
 	}
-	// find a valid port
-	for {
-		if l, err := net.Listen("tcp4", "127.0.0.1:0"); err == nil {
-			port = l.Addr().(*net.TCPAddr).Port
-			_ = l.Close()
-			break
-		}
-		time.Sleep(30 * time.Millisecond)
-	}
+	services = slicex.Uniq(append(services, config.Api.Services...))
 	// observatory
 	if serverData != nil {
 		outbounds := t.outNames()
@@ -1603,6 +1646,14 @@ func NewTemplate(serverInfos []serverInfo, setting *configure.Setting) (t *Templ
 
 	//set inbound listening address and routing
 	t.setDualStack()
+
+	if IsTransparentOn(t.Setting) {
+		switch t.Setting.TransparentType {
+		case configure.TransparentGvisorTun, configure.TransparentSystemTun:
+			//set outbound sendThrough address
+			t.setSendThrough()
+		}
+	}
 
 	//check if there are any duplicated tags
 	if err = t.checkDuplicatedTags(); err != nil {

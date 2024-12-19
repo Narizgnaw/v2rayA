@@ -2,27 +2,32 @@
 # yarn lockfile v1
 
 
-"@achrinza/event-pubsub@5.0.9":
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/@achrinza/event-pubsub/-/event-pubsub-5.0.9.tgz#ea6c4ee48bee9f50dac253ee08c1f65b144e1e84"
-  integrity sha512-49RyPP7w4abKMsLRHKgB9neAH085mdHQtv+0H5TnJeOq3oK57qQRd/JD9K5Z5D3vFODsvBODiBjYkRQZKdqiAA==
+"@achrinza/event-pubsub@5.0.9", "@achrinza/event-pubsub@^5":
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/@achrinza/event-pubsub/-/event-pubsub-5.0.10.tgz#325983d714bb422854a5dae26fa5b5f1ffe98265"
+  integrity sha512-UZl6Ake58eS0mPMC9xc9445ZVxpmLxsLrMLIpcFgtmbEuFTT/PlW3x4omstmRreGwk09VQvnn5ojGccf8DA1CA==
   dependencies:
-    "@achrinza/strong-type" "0.1.11"
+    "@achrinza/strong-type" "0.1.13"
 
-"@achrinza/node-ipc@^10.1.9", "@achrinza/node-ipc@^9.2.5":
-  version "10.1.9"
-  resolved "https://registry.yarnpkg.com/@achrinza/node-ipc/-/node-ipc-10.1.9.tgz#69c1312f503611dd9fade321aeac625a87e940f8"
-  integrity sha512-GZD3VwqVumV6qg5/3dS1H1hYp971IlMsRMmnR9joS3LplL4+Ou6t2mxKbC22Na40rjBa0za+AN969PJ0gxgW+A==
+"@achrinza/node-ipc@^10", "@achrinza/node-ipc@^10.1.10", "@achrinza/node-ipc@^9.2.5":
+  version "10.1.10"
+  resolved "https://registry.yarnpkg.com/@achrinza/node-ipc/-/node-ipc-10.1.10.tgz#104bdc668f792841058e4b1a56ee02335ec7e216"
+  integrity sha512-eBP/YMdiaxFHQ5OlKfYpnarMtuMmdtv+iI21UeXL1yATZEGEvRm2gqPsnio6SRlarLt9/IxTQJl0b/6S5yX+1g==
   dependencies:
     "@achrinza/event-pubsub" "5.0.9"
+    "@achrinza/strong-type" "1.1.8"
     "@node-ipc/js-queue" "2.0.3"
     js-message "1.0.7"
-    strong-type "1.0.1"
 
-"@achrinza/strong-type@0.1.11":
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@achrinza/strong-type/-/strong-type-0.1.11.tgz#4f8f22b19195c47edbd8411ba54f80452226a6a5"
-  integrity sha512-35Ou0jcGHGKQS8a6lgdan+u3BajmL315ZpDhH2/WSRNgG1jPpizhe87epgLaotN4uY3kXaEbfRU56sBPMdR5LA==
+"@achrinza/strong-type@0.1.13":
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/@achrinza/strong-type/-/strong-type-0.1.13.tgz#b1ac628eb049d0b632a5112ca02b08077c228ea3"
+  integrity sha512-I/m3inAuY2ptJ4RMe0ZKHZrlIXvTIUJHpOCkKCr4qvPpmKoYvOK5ty+mPIGllJJQ9lm78Oo5b4CY9Y77jAlVMQ==
+
+"@achrinza/strong-type@1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@achrinza/strong-type/-/strong-type-1.1.8.tgz#17dbb04d330c90841f0fa8215a701800150db7eb"
+  integrity sha512-ub/mgPRjbqZmwhU3rGya745IMn9znh3cm4g2iGepzvzhZUlKhLRfdkVoUD+H1NLaHE30pRp/FQHEoHTAVcleBQ==
 
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
@@ -2442,9 +2447,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001400, caniuse-lite@^1.0.30001426:
-  version "1.0.30001518"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001518.tgz"
-  integrity sha512-rup09/e3I0BKjncL+FesTayKtPrdwKhUufQFd3riFw1hHg8JmIFoInYfB102cFcY/pPgGmdyl/iy+jgiDi2vdA==
+  version "1.0.30001667"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001667.tgz"
+  integrity sha512-7LTwJjcRkzKFmtqGsibMeuXmvFDfZq/nzIjnmgCGzKKRVzjD72selLDK1oPF/Oxzmt4fNcPvTDvGqSDG4tCALw==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
@@ -2682,6 +2687,14 @@ compressible@~2.0.16:
   integrity sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==
   dependencies:
     mime-db ">= 1.43.0 < 2"
+
+compression-webpack-plugin@^10.0.0:
+  version "10.0.0"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/compression-webpack-plugin/-/compression-webpack-plugin-10.0.0.tgz#3496af1b0dc792e13efc474498838dbff915c823"
+  integrity sha512-wLXLIBwpul/ALcm7Aj+69X0pYT3BYt6DdPn3qrgBIh9YejV9Bju9ShhlAsjujLyWMo6SAweFIWaUoFmXZNuNrg==
+  dependencies:
+    schema-utils "^4.0.0"
+    serialize-javascript "^6.0.0"
 
 compression@^1.7.4:
   version "1.7.4"
@@ -4218,9 +4231,9 @@ http-parser-js@>=0.5.1:
   integrity sha512-SGeBX54F94Wgu5RH3X5jsDtf4eHyRogWX1XGT3b4HuW3tQPM4AaBzoUji/4AAJNXCEOWZ5O0DgZmJw1947gD5Q==
 
 http-proxy-middleware@^2.0.3:
-  version "2.0.6"
-  resolved "https://registry.npmmirror.com/http-proxy-middleware/-/http-proxy-middleware-2.0.6.tgz#e1a4dd6979572c7ab5a4e4b55095d1f32a74963f"
-  integrity sha512-ya/UeJ6HVBYxrgYotAZo1KvPWlgB48kUJLDePFeneHsVujFaW5WNj2NgWCAE//B1Dl02BIfYlpNgBy8Kf8Rjmw==
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-2.0.7.tgz#915f236d92ae98ef48278a95dedf17e991936ec6"
+  integrity sha512-fgVY8AV7qU7z/MmXJ/rxwbrtQH4jBQ9m7kp3llF0liB7glmFeVZFBepQb32T3y8n8k2+AEYuMPCpinYW+/CuRA==
   dependencies:
     "@types/http-proxy" "^1.17.8"
     http-proxy "^1.18.1"
@@ -6792,11 +6805,6 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmmirror.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
-
-strong-type@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/strong-type/-/strong-type-1.0.1.tgz#501d15117a0750472c39c09cad49b74a191daaca"
-  integrity sha512-K8KEzne00nA5HG3eSIPy44adqGTAMnNlpfvRWtiv8QvRsRm0/rMLHtSoppJ11iFtnmzzpgeYogzdY2YMgrUgOA==
 
 stylehacks@^5.1.1:
   version "5.1.1"
